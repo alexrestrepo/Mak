@@ -7,7 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA1ED7551CEAE8E30067331C /* PascalParserTD.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1ED7541CEAE8E30067331C /* PascalParserTD.m */; };
+		FA1ED7581CEAEB410067331C /* PascalScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1ED7571CEAEB410067331C /* PascalScanner.m */; };
+		FACF1A571CEED0F100F8D65F /* CodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FACF1A561CEED0F100F8D65F /* CodeGenerator.m */; };
+		FACF1A5A1CEED28700F8D65F /* Executor.m in Sources */ = {isa = PBXBuildFile; fileRef = FACF1A591CEED28700F8D65F /* Executor.m */; };
+		FACF1A5D1CEED3EC00F8D65F /* Pascal.m in Sources */ = {isa = PBXBuildFile; fileRef = FACF1A5C1CEED3EC00F8D65F /* Pascal.m */; };
 		FAD097161CE69C0C00797878 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD097151CE69C0C00797878 /* main.m */; };
+		FAD0971F1CE69CF500797878 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD0971E1CE69CF500797878 /* Parser.m */; };
+		FAD097251CE69D9100797878 /* Scanner.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD097241CE69D9100797878 /* Scanner.m */; };
+		FAD0972B1CE69E9C00797878 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD0972A1CE69E9C00797878 /* Token.m */; };
+		FAD0972E1CE69F2200797878 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD0972D1CE69F2200797878 /* Source.m */; };
+		FAD097331CE6A14D00797878 /* LineReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD097321CE6A14D00797878 /* LineReader.m */; };
+		FAD097381CE6B1E700797878 /* EofToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD097371CE6B1E700797878 /* EofToken.m */; };
+		FAD0973B1CE6B78A00797878 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD0973A1CE6B78A00797878 /* Message.m */; };
+		FAD0973F1CE6B8C200797878 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD0973E1CE6B8C200797878 /* Notifications.m */; };
+		FAD097461CEAE46E00797878 /* Backend.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD097451CEAE46E00797878 /* Backend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +37,40 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FA1ED7531CEAE8E30067331C /* PascalParserTD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalParserTD.h; sourceTree = "<group>"; };
+		FA1ED7541CEAE8E30067331C /* PascalParserTD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalParserTD.m; sourceTree = "<group>"; };
+		FA1ED7561CEAEB410067331C /* PascalScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalScanner.h; sourceTree = "<group>"; };
+		FA1ED7571CEAEB410067331C /* PascalScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalScanner.m; sourceTree = "<group>"; };
+		FACF1A551CEED0F100F8D65F /* CodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeGenerator.h; sourceTree = "<group>"; };
+		FACF1A561CEED0F100F8D65F /* CodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeGenerator.m; sourceTree = "<group>"; };
+		FACF1A581CEED28700F8D65F /* Executor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Executor.h; sourceTree = "<group>"; };
+		FACF1A591CEED28700F8D65F /* Executor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Executor.m; sourceTree = "<group>"; };
+		FACF1A5B1CEED3EC00F8D65F /* Pascal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pascal.h; path = Mak/Pascal.h; sourceTree = "<group>"; };
+		FACF1A5C1CEED3EC00F8D65F /* Pascal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pascal.m; path = Mak/Pascal.m; sourceTree = "<group>"; };
 		FAD097121CE69C0C00797878 /* Mak */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Mak; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAD097151CE69C0C00797878 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FAD097151CE69C0C00797878 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Mak/main.m; sourceTree = "<group>"; };
+		FAD0971C1CE69C3800797878 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = Mak/Macros.h; sourceTree = "<group>"; };
+		FAD0971D1CE69CF500797878 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
+		FAD0971E1CE69CF500797878 /* Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parser.m; sourceTree = "<group>"; };
+		FAD097231CE69D9100797878 /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scanner.h; sourceTree = "<group>"; };
+		FAD097241CE69D9100797878 /* Scanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scanner.m; sourceTree = "<group>"; };
+		FAD097291CE69E9C00797878 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
+		FAD0972A1CE69E9C00797878 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
+		FAD0972C1CE69F2200797878 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		FAD0972D1CE69F2200797878 /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Source.m; sourceTree = "<group>"; };
+		FAD097311CE6A14D00797878 /* LineReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineReader.h; sourceTree = "<group>"; };
+		FAD097321CE6A14D00797878 /* LineReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineReader.m; sourceTree = "<group>"; };
+		FAD097351CE6AFD800797878 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Notes.txt; path = Mak/Notes.txt; sourceTree = "<group>"; };
+		FAD097361CE6B1E700797878 /* EofToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EofToken.h; sourceTree = "<group>"; };
+		FAD097371CE6B1E700797878 /* EofToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EofToken.m; sourceTree = "<group>"; };
+		FAD097391CE6B78A00797878 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		FAD0973A1CE6B78A00797878 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		FAD0973D1CE6B8C200797878 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Notifications.h; path = Mak/Notifications.h; sourceTree = "<group>"; };
+		FAD0973E1CE6B8C200797878 /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Notifications.m; path = Mak/Notifications.m; sourceTree = "<group>"; };
+		FAD097411CEAE2D100797878 /* IntermediateCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntermediateCode.h; sourceTree = "<group>"; };
+		FAD097421CEAE2EF00797878 /* SymbolTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTable.h; sourceTree = "<group>"; };
+		FAD097441CEAE46E00797878 /* Backend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Backend.h; sourceTree = "<group>"; };
+		FAD097451CEAE46E00797878 /* Backend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Backend.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,9 +84,69 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA1ED7511CEAE8760067331C /* Frontend */ = {
+			isa = PBXGroup;
+			children = (
+				FAD097361CE6B1E700797878 /* EofToken.h */,
+				FAD097371CE6B1E700797878 /* EofToken.m */,
+				FAD097411CEAE2D100797878 /* IntermediateCode.h */,
+				FAD097311CE6A14D00797878 /* LineReader.h */,
+				FAD097321CE6A14D00797878 /* LineReader.m */,
+				FAD097391CE6B78A00797878 /* Message.h */,
+				FAD0973A1CE6B78A00797878 /* Message.m */,
+				FAD0971D1CE69CF500797878 /* Parser.h */,
+				FAD0971E1CE69CF500797878 /* Parser.m */,
+				FAD097231CE69D9100797878 /* Scanner.h */,
+				FAD097241CE69D9100797878 /* Scanner.m */,
+				FAD0972C1CE69F2200797878 /* Source.h */,
+				FAD0972D1CE69F2200797878 /* Source.m */,
+				FAD097421CEAE2EF00797878 /* SymbolTable.h */,
+				FAD097291CE69E9C00797878 /* Token.h */,
+				FAD0972A1CE69E9C00797878 /* Token.m */,
+				FA1ED7521CEAE8990067331C /* Pascal */,
+			);
+			name = Frontend;
+			sourceTree = "<group>";
+		};
+		FA1ED7521CEAE8990067331C /* Pascal */ = {
+			isa = PBXGroup;
+			children = (
+				FA1ED7531CEAE8E30067331C /* PascalParserTD.h */,
+				FA1ED7541CEAE8E30067331C /* PascalParserTD.m */,
+				FA1ED7561CEAEB410067331C /* PascalScanner.h */,
+				FA1ED7571CEAEB410067331C /* PascalScanner.m */,
+			);
+			name = Pascal;
+			sourceTree = "<group>";
+		};
+		FACF1A531CEED08E00F8D65F /* Compiler */ = {
+			isa = PBXGroup;
+			children = (
+				FACF1A551CEED0F100F8D65F /* CodeGenerator.h */,
+				FACF1A561CEED0F100F8D65F /* CodeGenerator.m */,
+			);
+			name = Compiler;
+			sourceTree = "<group>";
+		};
+		FACF1A541CEED09400F8D65F /* Interpreter */ = {
+			isa = PBXGroup;
+			children = (
+				FACF1A581CEED28700F8D65F /* Executor.h */,
+				FACF1A591CEED28700F8D65F /* Executor.m */,
+			);
+			name = Interpreter;
+			sourceTree = "<group>";
+		};
 		FAD097091CE69C0C00797878 = {
 			isa = PBXGroup;
 			children = (
+				FAD097351CE6AFD800797878 /* Notes.txt */,
+				FAD0973D1CE6B8C200797878 /* Notifications.h */,
+				FAD0973E1CE6B8C200797878 /* Notifications.m */,
+				FAD0971C1CE69C3800797878 /* Macros.h */,
+				FAD097151CE69C0C00797878 /* main.m */,
+				FACF1A5B1CEED3EC00F8D65F /* Pascal.h */,
+				FACF1A5C1CEED3EC00F8D65F /* Pascal.m */,
 				FAD097141CE69C0C00797878 /* Mak */,
 				FAD097131CE69C0C00797878 /* Products */,
 			);
@@ -57,9 +163,21 @@
 		FAD097141CE69C0C00797878 /* Mak */ = {
 			isa = PBXGroup;
 			children = (
-				FAD097151CE69C0C00797878 /* main.m */,
+				FA1ED7511CEAE8760067331C /* Frontend */,
+				FAD097431CEAE45A00797878 /* Backend */,
 			);
 			path = Mak;
+			sourceTree = "<group>";
+		};
+		FAD097431CEAE45A00797878 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				FACF1A541CEED09400F8D65F /* Interpreter */,
+				FACF1A531CEED08E00F8D65F /* Compiler */,
+				FAD097441CEAE46E00797878 /* Backend.h */,
+				FAD097451CEAE46E00797878 /* Backend.m */,
+			);
+			name = Backend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +236,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD097461CEAE46E00797878 /* Backend.m in Sources */,
+				FAD097381CE6B1E700797878 /* EofToken.m in Sources */,
+				FACF1A571CEED0F100F8D65F /* CodeGenerator.m in Sources */,
+				FAD097331CE6A14D00797878 /* LineReader.m in Sources */,
+				FA1ED7551CEAE8E30067331C /* PascalParserTD.m in Sources */,
+				FA1ED7581CEAEB410067331C /* PascalScanner.m in Sources */,
+				FAD0972E1CE69F2200797878 /* Source.m in Sources */,
+				FAD0971F1CE69CF500797878 /* Parser.m in Sources */,
+				FAD0973F1CE6B8C200797878 /* Notifications.m in Sources */,
+				FAD0972B1CE69E9C00797878 /* Token.m in Sources */,
+				FAD0973B1CE6B78A00797878 /* Message.m in Sources */,
+				FAD097251CE69D9100797878 /* Scanner.m in Sources */,
+				FACF1A5D1CEED3EC00F8D65F /* Pascal.m in Sources */,
+				FACF1A5A1CEED28700F8D65F /* Executor.m in Sources */,
 				FAD097161CE69C0C00797878 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +371,7 @@
 				FAD0971B1CE69C0C00797878 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
