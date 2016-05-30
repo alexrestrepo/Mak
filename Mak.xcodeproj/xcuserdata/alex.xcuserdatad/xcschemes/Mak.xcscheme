@@ -71,7 +71,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "hello.pas"
+            argument = "scannertest.txt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

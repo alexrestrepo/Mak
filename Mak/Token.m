@@ -10,12 +10,9 @@
 
 @interface Token ()
 
-@property (nonatomic, strong) id<TokenType> type;
-@property (nonatomic, strong) NSString *text;
-@property (nonatomic, strong) id value;
-@property (nonatomic, strong) Source *source;
 @property (nonatomic, assign) NSInteger lineNumber;
 @property (nonatomic, assign) NSInteger position;
+@property (nonatomic, strong) Source *source;
 
 @end
 
@@ -28,7 +25,6 @@
         _source = source;
         _lineNumber = source.lineNumber;
         _position = source.currentPosition;
-        
         [self extract];
     }
     return self;

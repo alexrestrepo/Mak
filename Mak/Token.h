@@ -18,6 +18,9 @@
 
 @property (nonatomic, assign, readonly) NSInteger lineNumber;
 @property (nonatomic, assign, readonly) NSInteger position;
+@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) id<TokenType> type;
+@property (nonatomic, strong) id value;
 
 - (instancetype)initWithSource:(Source *)source;
 

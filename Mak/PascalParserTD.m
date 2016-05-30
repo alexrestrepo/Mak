@@ -15,15 +15,42 @@
 #import "EofToken.h"
 #import "Message.h"
 #import "Macros.h"
+#import "PascalTokenType.h"
+#import "PascalErrorHandler.h"
+
+@interface PascalParserTD ()
+@property (nonatomic, strong) PascalErrorHandler *errorHandler;
+@end
 
 @implementation PascalParserTD
+
+- (instancetype)initWithScanner:(Scanner *)scanner {
+    self = [super initWithScanner:scanner];
+    if (self) {
+        _errorHandler = [PascalErrorHandler new];
+    }
+    return self;
+}
 
 - (void)parse {
     Token *token = nil;
     NSTimeInterval startTime = CACurrentMediaTime();
     
     while (![(token = [self nextToken]) isKindOfClass:[EofToken class]]) {
-        //DebugLog(@"%@", token);
+        id<TokenType> tokenType = token.type;
+        
+        NSAssert(tokenType, @"No token type??");
+        if (tokenType != [PascalTokenType ERROR]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:ParserEventNotificationName
+                                                                object:[Message messageWithType:MessageTypeToken
+                                                                                           body:@[@(token.lineNumber),
+                                                                                                  @(token.position),
+                                                                                                  tokenType ? tokenType : (id)@"null",
+                                                                                                  token.text ? token.text : (id)@"null",
+                                                                                                  token.value ? token.value : (id)@"null"]]];
+        } else {
+            [_errorHandler flagToken:token withErrorCode:(PascalErrorCode *)token.value];
+        }
     }
     
     NSTimeInterval elapsedTime = (CACurrentMediaTime() - startTime);

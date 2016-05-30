@@ -46,9 +46,15 @@
     NSString *descriptionString = nil;
     switch (_type) {
         case MessageTypeSourceLine:
-            descriptionString = [NSString stringWithFormat:@"%03ld %@", (long)[_body[0] integerValue], _body[1]];
+            descriptionString = [NSString stringWithFormat:@"%03ld %@\n", (long)[_body[0] integerValue], _body[1]];
             break;
         case MessageTypeSyntaxError:
+        {
+            NSString *msg = [@"-" stringByPaddingToLength:4 + [_body[1] integerValue]
+                                               withString:@"-"
+                                          startingAtIndex:0];
+            descriptionString = [msg stringByAppendingFormat:@"^\n*** %@ at[\"%@\"]\n", _body[3], _body[2]];
+        }
             break;
         case MessageTypeParserSummary:
             descriptionString = [NSString stringWithFormat:@"\n%20ld source lines.\n%20ld syntax errors.\n%20.2f seconds total parsing time.\n",
@@ -63,6 +69,12 @@
                                  (long)[_body[0] integerValue], [_body[1] doubleValue]];
             break;
         case MessageTypeToken:
+        {
+            NSString *type = [_body[2] description];
+            type = [type stringByPaddingToLength:15 withString:@" " startingAtIndex:0];
+            descriptionString = [NSString stringWithFormat:@">>> %@ line=%03ld, pos=%2ld, text=\"%@\" value=%@\n",
+                                 type, (long)[_body[0] integerValue], (long)[_body[1] integerValue], _body[3], _body[4]];
+        }
             break;
         case MessageTypeAssign:
             break;

@@ -62,8 +62,9 @@ static unsigned char const LineReaderDelimiter = '\n';
     }
     
     // End of line found
-    _lastRange = NSMakeRange(beginPos, endPos - beginPos + 1);
+    _lastRange = NSMakeRange(beginPos, endPos - beginPos); // don't add the \n
     NSData *lineData = [_data subdataWithRange:_lastRange];
+    _lastRange.length++; // skip the \n
     NSString *line = [[NSString alloc] initWithData:lineData encoding:_stringEncoding];
     _linesRead++;
     
