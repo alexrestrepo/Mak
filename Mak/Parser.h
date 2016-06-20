@@ -11,12 +11,12 @@
 @class Token;
 @class Scanner;
 @protocol IntermediateCode;
-@protocol SymbolTable;
+@protocol SymbolTableStack;
 
 @interface Parser : NSObject
 
 @property (nonatomic, strong, readonly) id<IntermediateCode> intermediateCode;
-@property (nonatomic, strong, readonly) id<SymbolTable> symbolTable;
+@property (nonatomic, strong, readonly) id<SymbolTableStack> symbolTableStack;
 
 - (instancetype)initWithScanner:(Scanner *)scanner;
 - (void)parse;

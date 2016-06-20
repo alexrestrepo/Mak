@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @protocol IntermediateCode;
-@protocol SymbolTable;
+@protocol SymbolTableStack;
 
 @interface Backend : NSObject
 
-- (void)processWithIntermediateCode:(id<IntermediateCode>)intermediateCode table:(id<SymbolTable>)symbolTable;
+- (void)processWithIntermediateCode:(id<IntermediateCode>)intermediateCode table:(id<SymbolTableStack>)symbolTableStack;
 
 @end

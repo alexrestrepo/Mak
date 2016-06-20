@@ -18,7 +18,8 @@
 #import "PascalParserTD.h"
 #import "PascalScanner.h"
 #import "Source.h"
-#import "SymbolTable.h"
+#import "SymbolTableStack.h"
+#import "CrossReferencer.h"
 
 @interface Pascal ()
 
@@ -26,7 +27,7 @@
 @property (nonatomic, strong) Source *source;
 @property (nonatomic, strong) Backend *backend;
 @property (nonatomic, strong) id<IntermediateCode> intermediateCode;
-@property (nonatomic, strong) id<SymbolTable> symbolTable;
+@property (nonatomic, strong) id<SymbolTableStack> symbolTableStack;
 
 @end
 
@@ -77,9 +78,14 @@
         [_source close];
         
         _intermediateCode = _parser.intermediateCode;
-        _symbolTable = _parser.symbolTable;
+        _symbolTableStack = _parser.symbolTableStack;
         
-        [_backend processWithIntermediateCode:_intermediateCode table:_symbolTable];
+        if (xref) {
+            CrossReferencer *xreferencer = [CrossReferencer new];
+            [xreferencer printSymbolTableStack:_symbolTableStack];
+        }
+        
+        [_backend processWithIntermediateCode:_intermediateCode table:_symbolTableStack];
     }
     return self;
 }

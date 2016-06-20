@@ -17,6 +17,7 @@
 #import "Macros.h"
 #import "PascalTokenType.h"
 #import "PascalErrorHandler.h"
+#import "SymbolTableFactory.h"
 
 @interface PascalParserTD ()
 @property (nonatomic, strong) PascalErrorHandler *errorHandler;
@@ -38,19 +39,21 @@
     
     while (![(token = [self nextToken]) isKindOfClass:[EofToken class]]) {
         id<TokenType> tokenType = token.type;
-        
         NSAssert(tokenType, @"No token type??");
-        if (tokenType != [PascalTokenType ERROR]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ParserEventNotificationName
-                                                                object:[Message messageWithType:MessageTypeToken
-                                                                                           body:@[@(token.lineNumber),
-                                                                                                  @(token.position),
-                                                                                                  tokenType ? tokenType : (id)@"null",
-                                                                                                  token.text ? token.text : (id)@"null",
-                                                                                                  token.value ? token.value : (id)@"null"]]];
-        } else {
+        
+        if (tokenType == [PascalTokenType IDENTIFIER]) {
+            NSString *name = [token.text lowercaseString];
+            id<SymbolTableEntry> entry = [[self symbolTableStack] lookup:name];
+            if (!entry) {
+                entry = [[self symbolTableStack] addEntryToLocalTable:name];
+            }
+            
+            [entry appendLineNumber:token.lineNumber];
+            
+        } else if (tokenType == [PascalTokenType ERROR]) {
             [_errorHandler flagToken:token withErrorCode:(PascalErrorCode *)token.value];
         }
+                        
     }
     
     NSTimeInterval elapsedTime = (CACurrentMediaTime() - startTime);

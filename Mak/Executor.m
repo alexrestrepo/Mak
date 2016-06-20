@@ -17,7 +17,7 @@
 
 @implementation Executor
 
-- (void)processWithIntermediateCode:(id<IntermediateCode>)intermediateCode table:(id<SymbolTable>)symbolTable {
+- (void)processWithIntermediateCode:(id<IntermediateCode>)intermediateCode table:(id<SymbolTableStack>)symbolTableStackpa {
     NSTimeInterval start = CACurrentMediaTime();
     NSTimeInterval elapsedTime = CACurrentMediaTime() - start;
     NSInteger executionCount = 0;

@@ -17,7 +17,7 @@
 
 @implementation CodeGenerator
 
-- (void)processWithIntermediateCode:(id<IntermediateCode>)intermediateCode table:(id<SymbolTable>)symbolTable {
+- (void)processWithIntermediateCode:(id<IntermediateCode>)intermediateCode table:(id<SymbolTableStack>)symbolTableStack {
     NSTimeInterval start = CACurrentMediaTime();
     NSTimeInterval elapsedTime = CACurrentMediaTime() - start;
     NSInteger instructionCount = 0;

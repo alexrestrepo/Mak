@@ -31,6 +31,12 @@
 		FAFAF4691CFC06A800D563B0 /* PascalTokenType.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFAF4681CFC06A800D563B0 /* PascalTokenType.m */; };
 		FAFAF46C1CFC15FA00D563B0 /* PascalWordToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFAF46B1CFC15FA00D563B0 /* PascalWordToken.m */; };
 		FAFAF46F1CFC1C5A00D563B0 /* PascalStringToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFAF46E1CFC1C5A00D563B0 /* PascalStringToken.m */; };
+		FAFBCBCF1D176C1100C036D6 /* SymbolTableFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBCBCE1D176C1100C036D6 /* SymbolTableFactory.m */; };
+		FAFBCBD21D176FAB00C036D6 /* SymTabStack.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBCBD11D176FAB00C036D6 /* SymTabStack.m */; };
+		FAFBCBD51D1771C300C036D6 /* SymTab.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBCBD41D1771C300C036D6 /* SymTab.m */; };
+		FAFBCBD81D17756300C036D6 /* SymTabEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBCBD71D17756300C036D6 /* SymTabEntry.m */; };
+		FAFBCBDB1D1777A400C036D6 /* SymTabKey.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBCBDA1D1777A400C036D6 /* SymTabKey.m */; };
+		FAFBCBE21D177CC000C036D6 /* CrossReferencer.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBCBE11D177CC000C036D6 /* CrossReferencer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +56,7 @@
 		FA1ED7541CEAE8E30067331C /* PascalParserTD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalParserTD.m; sourceTree = "<group>"; };
 		FA1ED7561CEAEB410067331C /* PascalScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalScanner.h; sourceTree = "<group>"; };
 		FA1ED7571CEAEB410067331C /* PascalScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalScanner.m; sourceTree = "<group>"; };
+		FA53077B1D175A2100305683 /* SymbolTableStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableStack.h; sourceTree = "<group>"; };
 		FA536C1E1CFBCF87003586A4 /* PascalErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalErrorHandler.h; sourceTree = "<group>"; };
 		FA536C1F1CFBCF87003586A4 /* PascalErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalErrorHandler.m; sourceTree = "<group>"; };
 		FA536C211CFBD2F5003586A4 /* PascalErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalErrorCode.h; sourceTree = "<group>"; };
@@ -98,6 +105,20 @@
 		FAFAF46B1CFC15FA00D563B0 /* PascalWordToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalWordToken.m; sourceTree = "<group>"; };
 		FAFAF46D1CFC1C5A00D563B0 /* PascalStringToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalStringToken.h; sourceTree = "<group>"; };
 		FAFAF46E1CFC1C5A00D563B0 /* PascalStringToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalStringToken.m; sourceTree = "<group>"; };
+		FAFBCBCC1D17666300C036D6 /* SymbolTableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableEntry.h; sourceTree = "<group>"; };
+		FAFBCBCD1D176C1100C036D6 /* SymbolTableFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableFactory.h; sourceTree = "<group>"; };
+		FAFBCBCE1D176C1100C036D6 /* SymbolTableFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolTableFactory.m; sourceTree = "<group>"; };
+		FAFBCBD01D176FAB00C036D6 /* SymTabStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymTabStack.h; sourceTree = "<group>"; };
+		FAFBCBD11D176FAB00C036D6 /* SymTabStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymTabStack.m; sourceTree = "<group>"; };
+		FAFBCBD31D1771C300C036D6 /* SymTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymTab.h; sourceTree = "<group>"; };
+		FAFBCBD41D1771C300C036D6 /* SymTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymTab.m; sourceTree = "<group>"; };
+		FAFBCBD61D17756300C036D6 /* SymTabEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymTabEntry.h; sourceTree = "<group>"; };
+		FAFBCBD71D17756300C036D6 /* SymTabEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymTabEntry.m; sourceTree = "<group>"; };
+		FAFBCBD91D1777A400C036D6 /* SymTabKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymTabKey.h; sourceTree = "<group>"; };
+		FAFBCBDA1D1777A400C036D6 /* SymTabKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymTabKey.m; sourceTree = "<group>"; };
+		FAFBCBDF1D17785600C036D6 /* SymbolTableKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableKey.h; sourceTree = "<group>"; };
+		FAFBCBE01D177CC000C036D6 /* CrossReferencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossReferencer.h; sourceTree = "<group>"; };
+		FAFBCBE11D177CC000C036D6 /* CrossReferencer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossReferencer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +137,6 @@
 			children = (
 				FAD097361CE6B1E700797878 /* EofToken.h */,
 				FAD097371CE6B1E700797878 /* EofToken.m */,
-				FAD097411CEAE2D100797878 /* IntermediateCode.h */,
 				FAD097311CE6A14D00797878 /* LineReader.h */,
 				FAD097321CE6A14D00797878 /* LineReader.m */,
 				FAD097391CE6B78A00797878 /* Message.h */,
@@ -127,7 +147,6 @@
 				FAD097241CE69D9100797878 /* Scanner.m */,
 				FAD0972C1CE69F2200797878 /* Source.h */,
 				FAD0972D1CE69F2200797878 /* Source.m */,
-				FAD097421CEAE2EF00797878 /* SymbolTable.h */,
 				FAD097291CE69E9C00797878 /* Token.h */,
 				FAD0972A1CE69E9C00797878 /* Token.m */,
 				FA1ED7521CEAE8990067331C /* Pascal */,
@@ -162,6 +181,30 @@
 				FAAC981F1D08E30D006F0705 /* PascalNumberToken.m */,
 			);
 			name = Pascal;
+			sourceTree = "<group>";
+		};
+		FA53077A1D175A0900305683 /* Intermediate */ = {
+			isa = PBXGroup;
+			children = (
+				FAD097411CEAE2D100797878 /* IntermediateCode.h */,
+				FAD097421CEAE2EF00797878 /* SymbolTable.h */,
+				FAFBCBCC1D17666300C036D6 /* SymbolTableEntry.h */,
+				FAFBCBCD1D176C1100C036D6 /* SymbolTableFactory.h */,
+				FAFBCBCE1D176C1100C036D6 /* SymbolTableFactory.m */,
+				FAFBCBDF1D17785600C036D6 /* SymbolTableKey.h */,
+				FA53077B1D175A2100305683 /* SymbolTableStack.h */,
+				FAFBCBD31D1771C300C036D6 /* SymTab.h */,
+				FAFBCBD41D1771C300C036D6 /* SymTab.m */,
+				FAFBCBD61D17756300C036D6 /* SymTabEntry.h */,
+				FAFBCBD71D17756300C036D6 /* SymTabEntry.m */,
+				FAFBCBD91D1777A400C036D6 /* SymTabKey.h */,
+				FAFBCBDA1D1777A400C036D6 /* SymTabKey.m */,
+				FAFBCBD01D176FAB00C036D6 /* SymTabStack.h */,
+				FAFBCBD11D176FAB00C036D6 /* SymTabStack.m */,
+				FAFBCBE01D177CC000C036D6 /* CrossReferencer.h */,
+				FAFBCBE11D177CC000C036D6 /* CrossReferencer.m */,
+			);
+			name = Intermediate;
 			sourceTree = "<group>";
 		};
 		FACF1A531CEED08E00F8D65F /* Compiler */ = {
@@ -208,6 +251,7 @@
 		FAD097141CE69C0C00797878 /* Mak */ = {
 			isa = PBXGroup;
 			children = (
+				FA53077A1D175A0900305683 /* Intermediate */,
 				FA1ED7511CEAE8760067331C /* Frontend */,
 				FAD097431CEAE45A00797878 /* Backend */,
 			);
@@ -281,21 +325,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAFBCBD21D176FAB00C036D6 /* SymTabStack.m in Sources */,
 				FAFAF46C1CFC15FA00D563B0 /* PascalWordToken.m in Sources */,
+				FAFBCBD81D17756300C036D6 /* SymTabEntry.m in Sources */,
 				FAD097461CEAE46E00797878 /* Backend.m in Sources */,
 				FAAC981D1D08DC8B006F0705 /* PascalSpecialSymbolToken.m in Sources */,
 				FAD097381CE6B1E700797878 /* EofToken.m in Sources */,
 				FACF1A571CEED0F100F8D65F /* CodeGenerator.m in Sources */,
 				FA536C231CFBD2F5003586A4 /* PascalErrorCode.m in Sources */,
+				FAFBCBD51D1771C300C036D6 /* SymTab.m in Sources */,
 				FAD097331CE6A14D00797878 /* LineReader.m in Sources */,
 				FA1ED7551CEAE8E30067331C /* PascalParserTD.m in Sources */,
 				FAFAF4621CFBFABD00D563B0 /* PascalErrorToken.m in Sources */,
 				FA1ED7581CEAEB410067331C /* PascalScanner.m in Sources */,
+				FAFBCBCF1D176C1100C036D6 /* SymbolTableFactory.m in Sources */,
 				FAD0972E1CE69F2200797878 /* Source.m in Sources */,
 				FAFAF46F1CFC1C5A00D563B0 /* PascalStringToken.m in Sources */,
 				FAD0971F1CE69CF500797878 /* Parser.m in Sources */,
 				FAD0973F1CE6B8C200797878 /* Notifications.m in Sources */,
 				FAD0972B1CE69E9C00797878 /* Token.m in Sources */,
+				FAFBCBDB1D1777A400C036D6 /* SymTabKey.m in Sources */,
 				FAD0973B1CE6B78A00797878 /* Message.m in Sources */,
 				FA536C201CFBCF87003586A4 /* PascalErrorHandler.m in Sources */,
 				FAD097251CE69D9100797878 /* Scanner.m in Sources */,
@@ -303,6 +352,7 @@
 				FAFAF4651CFBFBFA00D563B0 /* PascalToken.m in Sources */,
 				FAAC98201D08E30D006F0705 /* PascalNumberToken.m in Sources */,
 				FACF1A5A1CEED28700F8D65F /* Executor.m in Sources */,
+				FAFBCBE21D177CC000C036D6 /* CrossReferencer.m in Sources */,
 				FAD097161CE69C0C00797878 /* main.m in Sources */,
 				FAFAF4691CFC06A800D563B0 /* PascalTokenType.m in Sources */,
 			);

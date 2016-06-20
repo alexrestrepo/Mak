@@ -9,12 +9,12 @@
 #import "Parser.h"
 
 #import "Macros.h"
-#import "SymbolTable.h"
+#import "SymbolTableFactory.h"
 #import "Scanner.h"
 #import "IntermediateCode.h"
 #import "Token.h"
 
-static id<SymbolTable> SymbolTable;
+static id<SymbolTableStack> SymbolTableStack;
 
 @interface Parser()
 
@@ -24,6 +24,12 @@ static id<SymbolTable> SymbolTable;
 @end
 
 @implementation Parser
+
++ (void)initialize {
+    if (self == [Parser class]) {
+        SymbolTableStack = [SymbolTableFactory symbolTableStack];
+    }
+}
 
 - (instancetype)initWithScanner:(Scanner *)scanner {
     self = [super init];
@@ -44,8 +50,8 @@ static id<SymbolTable> SymbolTable;
     return [_scanner nextToken];
 }
 
-- (id<SymbolTable>)symbolTable {
-    return SymbolTable;
+- (id<SymbolTableStack>)symbolTableStack {
+    return SymbolTableStack;
 }
 
 @end

@@ -67,11 +67,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-i"
+            argument = "-ix"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "scannertest.txt"
+            argument = "newton.pas"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

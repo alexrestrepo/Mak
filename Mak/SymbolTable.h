@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SymbolTableEntry.h"
+
 @protocol SymbolTable <NSObject>
+
+- (NSInteger)nestingLevel;
+
+- (id<SymbolTableEntry>)addEntry:(NSString *)name;
+- (id<SymbolTableEntry>)lookup:(NSString *)name;
+
+- (NSArray *)sortedEntries;
 
 @end
