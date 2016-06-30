@@ -8,6 +8,11 @@
 
 #import "Parser.h"
 
+#import "PascalErrorHandler.h"
+
 @interface PascalParserTD : Parser
+
+@property (nonatomic, strong, readonly) PascalErrorHandler *errorHandler;
+- (instancetype)initWithParent:(PascalParserTD *)parent;
 
 @end

@@ -67,11 +67,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-ix"
+            argument = "-xi"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "newton.pas"
+            argument = "$(PROJECT_DIR)/Samples/assignsamples.txt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

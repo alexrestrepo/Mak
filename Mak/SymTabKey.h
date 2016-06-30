@@ -8,17 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, SymbolTableKeys) {
-    CONSTANT_VALUE,
-    ROUTINE_CODE,
-    ROUTINE_SYMTAB,
-    ROUTINE_ICODE,
-    ROUTINE_PARAMS,
-    ROUTINE_ROUTINES,
-    DATA_VALUE
-};
+#import "SymbolTableKey.h"
 
-@interface SymTabKey : NSObject
+@interface SymTabKey : NSObject <SymbolTableKey>
 
 @property (nonatomic, assign, readonly) NSInteger ordinal;
 

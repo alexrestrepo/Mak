@@ -16,11 +16,12 @@
 #import "Message.h"
 #import "Macros.h"
 #import "PascalTokenType.h"
-#import "PascalErrorHandler.h"
 #import "SymbolTableFactory.h"
+#import "IntermediateCodeFactory.h"
+#import "StatementParser.h"
 
 @interface PascalParserTD ()
-@property (nonatomic, strong) PascalErrorHandler *errorHandler;
+
 @end
 
 @implementation PascalParserTD
@@ -33,27 +34,33 @@
     return self;
 }
 
+- (instancetype)initWithParent:(PascalParserTD *)parent {
+    return [self initWithScanner:parent.scanner];
+}
+
 - (void)parse {
-    Token *token = nil;
+    self.intermediateCode = [IntermediateCodeFactory intermediateCode];
     NSTimeInterval startTime = CACurrentMediaTime();
     
-    while (![(token = [self nextToken]) isKindOfClass:[EofToken class]]) {
-        id<TokenType> tokenType = token.type;
-        NSAssert(tokenType, @"No token type??");
+    Token *token = [self nextToken];
+    id<IntermediateCodeNode> rootNode = nil;
+    
+    if (token.type == [PascalTokenType BEGIN]) {
+        StatementParser *statementParser = [[StatementParser alloc] initWithParent:self];
+        rootNode = [statementParser parseToken:token];
+        token = [self currentToken];
         
-        if (tokenType == [PascalTokenType IDENTIFIER]) {
-            NSString *name = [token.text lowercaseString];
-            id<SymbolTableEntry> entry = [[self symbolTableStack] lookup:name];
-            if (!entry) {
-                entry = [[self symbolTableStack] addEntryToLocalTable:name];
-            }
-            
-            [entry appendLineNumber:token.lineNumber];
-            
-        } else if (tokenType == [PascalTokenType ERROR]) {
-            [_errorHandler flagToken:token withErrorCode:(PascalErrorCode *)token.value];
-        }
-                        
+    } else {
+        [_errorHandler flagToken:token withErrorCode:[PascalErrorCode UNEXPECTED_TOKEN]];
+    }
+    
+    if (token.type != [PascalTokenType DOT]) {
+        [_errorHandler flagToken:token withErrorCode:[PascalErrorCode MISSING_PERIOD]];
+    }
+    
+    token = [self currentToken];
+    if (rootNode) {
+        [self.intermediateCode setRootNode:rootNode];
     }
     
     NSTimeInterval elapsedTime = (CACurrentMediaTime() - startTime);

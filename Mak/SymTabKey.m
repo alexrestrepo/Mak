@@ -8,11 +8,15 @@
 
 #import "SymTabKey.h"
 
-@interface SymTabKey()
-
-@property (nonatomic, assign) NSInteger ordinal;
-
-@end
+typedef NS_ENUM(NSUInteger, SymbolTableKeys) {
+    CONSTANT_VALUE,
+    ROUTINE_CODE,
+    ROUTINE_SYMTAB,
+    ROUTINE_ICODE,
+    ROUTINE_PARAMS,
+    ROUTINE_ROUTINES,
+    DATA_VALUE
+};
 
 @implementation SymTabKey
 
@@ -42,6 +46,10 @@
     if (self) {
         _ordinal = ordinal;
     }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
     return self;
 }
 

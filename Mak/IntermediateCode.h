@@ -8,6 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol IntermediateCodeKey <NSObject, NSCopying>
+
+@end
+
+@protocol IntermediateCodeNodeType <NSObject>
+
+@end
+
+@protocol IntermediateCodeNode <NSObject, NSCopying>
+
+@property (nonatomic, strong) id<IntermediateCodeNodeType> type;
+@property (nonatomic, weak) id<IntermediateCodeNode> parentNode;
+
+- (id<IntermediateCodeNode>)addChild:(id<IntermediateCodeNode>)child;
+- (NSArray<id<IntermediateCodeNode>> *)children;
+- (NSDictionary<id<IntermediateCodeKey>, id> *)attributes;
+- (void)setAttribute:(id)value forKey:(id<IntermediateCodeKey>)key;
+- (id)attributeForKey:(id<IntermediateCodeKey>)key;
+
+@end
+
 @protocol IntermediateCode <NSObject>
+
+- (id<IntermediateCodeNode>)rootNode;
+- (id<IntermediateCodeNode>)setRootNode:(id<IntermediateCodeNode>)rootNode;
 
 @end

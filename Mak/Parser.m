@@ -16,13 +16,6 @@
 
 static id<SymbolTableStack> SymbolTableStack;
 
-@interface Parser()
-
-@property (nonatomic, strong) Scanner *scanner;
-@property (nonatomic, strong) id<IntermediateCode> intermediateCode;
-
-@end
-
 @implementation Parser
 
 + (void)initialize {

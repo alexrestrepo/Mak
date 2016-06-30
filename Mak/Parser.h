@@ -15,7 +15,8 @@
 
 @interface Parser : NSObject
 
-@property (nonatomic, strong, readonly) id<IntermediateCode> intermediateCode;
+@property (nonatomic, strong) id<IntermediateCode> intermediateCode;
+@property (nonatomic, strong, readonly) Scanner *scanner;
 @property (nonatomic, strong, readonly) id<SymbolTableStack> symbolTableStack;
 
 - (instancetype)initWithScanner:(Scanner *)scanner;

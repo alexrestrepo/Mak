@@ -10,7 +10,7 @@
 
 #import "Source.h"
 
-@protocol TokenType <NSObject>
+@protocol TokenType <NSObject, NSCopying>
 
 @end
 

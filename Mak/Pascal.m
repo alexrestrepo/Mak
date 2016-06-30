@@ -20,6 +20,7 @@
 #import "Source.h"
 #import "SymbolTableStack.h"
 #import "CrossReferencer.h"
+#import "ParseTreePrinter.h"
 
 @interface Pascal ()
 
@@ -39,8 +40,8 @@
         const BOOL intermediate = [flags containsString:@"i"];
         const BOOL xref = [flags containsString:@"x"];
         
-        DebugLog(@"i:%@ x:%@", intermediate ? @"YES" : @"NO", xref ? @"YES" : @"NO");
-        
+        DebugLog(@"source:%@ i:%@ x:%@", path, intermediate ? @"YES" : @"NO", xref ? @"YES" : @"NO");
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onMessage:)
                                                      name:SourceEventNotificationName
@@ -83,6 +84,12 @@
         if (xref) {
             CrossReferencer *xreferencer = [CrossReferencer new];
             [xreferencer printSymbolTableStack:_symbolTableStack];
+        }
+        
+        if (intermediate) {
+            ParseTreePrinter *printer = [[ParseTreePrinter alloc] init];
+            NSString *dump = [printer stringFromIntermediateCode:_intermediateCode];
+            printf("%s", [dump UTF8String]);
         }
         
         [_backend processWithIntermediateCode:_intermediateCode table:_symbolTableStack];
