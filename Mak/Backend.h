@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol IntermediateCode;
-@protocol SymbolTableStack;
+#import "SymbolTableStack.h"
+#import "IntermediateCode.h"
 
 @interface Backend : NSObject
+
+@property (nonatomic, strong) id<SymbolTableStack> symbolTableStack;
+@property (nonatomic, strong) id<IntermediateCode> intermediateCode;
 
 - (void)processWithIntermediateCode:(id<IntermediateCode>)intermediateCode table:(id<SymbolTableStack>)symbolTableStack;
 

@@ -20,22 +20,19 @@
 #import "IntermediateCodeFactory.h"
 #import "StatementParser.h"
 
-@interface PascalParserTD ()
+static PascalErrorHandler *ErrorHandler;
 
-@end
 
 @implementation PascalParserTD
 
-- (instancetype)initWithScanner:(Scanner *)scanner {
-    self = [super initWithScanner:scanner];
-    if (self) {
-        _errorHandler = [PascalErrorHandler new];
++ (void)initialize {
+    if (self == [PascalParserTD class]) {
+        ErrorHandler = [PascalErrorHandler new];
     }
-    return self;
 }
 
 - (instancetype)initWithParent:(PascalParserTD *)parent {
-    return [self initWithScanner:parent.scanner];
+    return [super initWithScanner:parent.scanner];
 }
 
 - (void)parse {
@@ -51,11 +48,11 @@
         token = [self currentToken];
         
     } else {
-        [_errorHandler flagToken:token withErrorCode:[PascalErrorCode UNEXPECTED_TOKEN]];
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode UNEXPECTED_TOKEN]];
     }
     
     if (token.type != [PascalTokenType DOT]) {
-        [_errorHandler flagToken:token withErrorCode:[PascalErrorCode MISSING_PERIOD]];
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode MISSING_PERIOD]];
     }
     
     token = [self currentToken];
@@ -73,8 +70,12 @@
     
 }
 
+- (PascalErrorHandler *)errorHandler {
+    return ErrorHandler;
+}
+
 - (NSInteger)errorCount {
-    return 0;
+    return self.errorHandler.errorCount;
 }
 
 @end

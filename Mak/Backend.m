@@ -7,18 +7,7 @@
 //
 
 #import "Backend.h"
-
-#import "SymbolTableStack.h"
-#import "IntermediateCode.h"
 #import "Macros.h"
-
-
-@interface Backend ()
-
-@property (nonatomic, strong) id<SymbolTableStack> symbolTableStack;
-@property (nonatomic, strong) id<IntermediateCode> intermediateCode;
-
-@end
 
 @implementation Backend
 

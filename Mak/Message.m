@@ -43,7 +43,7 @@
 }
 
 - (NSString *)description {
-    NSString *descriptionString = nil;
+    NSString *descriptionString = @"";
     switch (_type) {
         case MessageTypeSourceLine:
             descriptionString = [NSString stringWithFormat:@"%03ld %@\n", (long)[_body[0] integerValue], _body[1]];
@@ -77,6 +77,7 @@
         }
             break;
         case MessageTypeAssign:
+            
             break;
         case MessageTypeFetch:
             break;

@@ -43,17 +43,17 @@
         DebugLog(@"source:%@ i:%@ x:%@", path, intermediate ? @"YES" : @"NO", xref ? @"YES" : @"NO");
 
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onMessage:)
+                                                 selector:@selector(onSourceMessage:)
                                                      name:SourceEventNotificationName
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onMessage:)
+                                                 selector:@selector(onParserMessage:)
                                                      name:ParserEventNotificationName
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onMessage:)
+                                                 selector:@selector(onBackendMessage:)
                                                      name:BackendEventNotificationName
                                                    object:nil];
         
@@ -71,36 +71,68 @@
         } else if ([operation isEqualToString:@"execute"]) {
             _backend = [Executor new];
             
-        } else {
-            
         }
         
         [_parser parse];
         [_source close];
         
-        _intermediateCode = _parser.intermediateCode;
-        _symbolTableStack = _parser.symbolTableStack;
-        
-        if (xref) {
-            CrossReferencer *xreferencer = [CrossReferencer new];
-            [xreferencer printSymbolTableStack:_symbolTableStack];
+        if (_parser.errorCount == 0) {
+            _intermediateCode = _parser.intermediateCode;
+            _symbolTableStack = _parser.symbolTableStack;
+            
+            if (xref) {
+                CrossReferencer *xreferencer = [CrossReferencer new];
+                [xreferencer printSymbolTableStack:_symbolTableStack];
+            }
+            
+            if (intermediate) {
+                ParseTreePrinter *printer = [[ParseTreePrinter alloc] init];
+                NSString *dump = [printer stringFromIntermediateCode:_intermediateCode];
+                printf("%s", [dump UTF8String]);
+            }
+            
+            [_backend processWithIntermediateCode:_intermediateCode table:_symbolTableStack];
         }
         
-        if (intermediate) {
-            ParseTreePrinter *printer = [[ParseTreePrinter alloc] init];
-            NSString *dump = [printer stringFromIntermediateCode:_intermediateCode];
-            printf("%s", [dump UTF8String]);
-        }
-        
-        [_backend processWithIntermediateCode:_intermediateCode table:_symbolTableStack];
     }
     return self;
 }
 
-- (void)onMessage:(NSNotification *)note {
+- (void)onSourceMessage:(NSNotification *)note {
     Message *message = note.object;
     NSString *messageString = [NSString stringWithFormat:@"%@", message];
     printf("%s", [messageString UTF8String]);
+}
+
+- (void)onParserMessage:(NSNotification *)note {
+    [self onSourceMessage:note];
+}
+
+- (void)onBackendMessage:(NSNotification *)note {
+    Message *message = note.object;
+    switch (message.type) {
+        case MessageTypeAssign:
+        {
+            NSString *msgString = [NSString stringWithFormat:@" >>> LINE %03ld: %@ = %@\n", (long)[message.body[0] integerValue], message.body[1], message.body[2]];
+            printf("%s", [msgString UTF8String]);
+        }
+            break;
+        
+        case MessageTypeRuntimeError:
+        {
+            printf("*** RUNTIME ERROR AT LINE %03ld", (long)[message.body[1] integerValue]);
+            printf(": %s\n", [message.body[0] UTF8String]);
+        }
+            break;
+            
+        case MessageTypeInterpreterSummary: {
+            NSString *messageString = [NSString stringWithFormat:@"%@", message];
+            printf("%s", [messageString UTF8String]);
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 @end
