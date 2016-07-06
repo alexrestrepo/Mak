@@ -21,6 +21,8 @@ static NSDictionary <PascalTokenType *, id<IntermediateCodeNodeType>> *AddopMap;
 static NSSet <PascalTokenType *> *Multops;
 static NSDictionary <PascalTokenType *, id<IntermediateCodeNodeType>> *MultopMap;
 
+static NSSet <id<TokenType>> *ExprStartSet;
+
 @implementation ExpressionParser
 
 + (void)initialize {
@@ -59,7 +61,22 @@ static NSDictionary <PascalTokenType *, id<IntermediateCodeNodeType>> *MultopMap
                       [PascalTokenType DIV]:[IntermediateCodeNodeTypeImp INTEGER_DIVIDE],
                       [PascalTokenType MOD]:[IntermediateCodeNodeTypeImp MOD],
                       [PascalTokenType AND]:[IntermediateCodeNodeTypeImp AND]};
+        
+        ExprStartSet = [NSSet setWithArray:@[
+                                             [PascalTokenType IDENTIFIER],
+                                             [PascalTokenType INTEGER],
+                                             [PascalTokenType LEFT_PAREN],
+                                             [PascalTokenType MINUS],
+                                             [PascalTokenType NOT],
+                                             [PascalTokenType PLUS],
+                                             [PascalTokenType REAL],
+                                             [PascalTokenType STRING],
+                                             ]];
     }
+}
+
++ (NSSet *)exprStartSet {
+    return ExprStartSet;
 }
 
 - (id<IntermediateCodeNode>)parseToken:(Token *)token {

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA01DA8D1D2D8C7C00FEF775 /* RepeatStatementParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA01DA8C1D2D8C7C00FEF775 /* RepeatStatementParser.m */; };
+		FA01DA901D2D8C8600FEF775 /* WhileStatementParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA01DA8F1D2D8C8600FEF775 /* WhileStatementParser.m */; };
+		FA01DA931D2D8C8F00FEF775 /* ForStatementParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA01DA921D2D8C8F00FEF775 /* ForStatementParser.m */; };
+		FA01DA961D2D8C9700FEF775 /* IfStatementParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA01DA951D2D8C9700FEF775 /* IfStatementParser.m */; };
+		FA01DA991D2D8C9F00FEF775 /* CaseStatementParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA01DA981D2D8C9F00FEF775 /* CaseStatementParser.m */; };
 		FA1ED7551CEAE8E30067331C /* PascalParserTD.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1ED7541CEAE8E30067331C /* PascalParserTD.m */; };
 		FA1ED7581CEAEB410067331C /* PascalScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1ED7571CEAEB410067331C /* PascalScanner.m */; };
 		FA536C201CFBCF87003586A4 /* PascalErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FA536C1F1CFBCF87003586A4 /* PascalErrorHandler.m */; };
@@ -69,6 +74,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FA01DA8B1D2D8C7C00FEF775 /* RepeatStatementParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatStatementParser.h; sourceTree = "<group>"; };
+		FA01DA8C1D2D8C7C00FEF775 /* RepeatStatementParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatStatementParser.m; sourceTree = "<group>"; };
+		FA01DA8E1D2D8C8600FEF775 /* WhileStatementParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhileStatementParser.h; sourceTree = "<group>"; };
+		FA01DA8F1D2D8C8600FEF775 /* WhileStatementParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhileStatementParser.m; sourceTree = "<group>"; };
+		FA01DA911D2D8C8F00FEF775 /* ForStatementParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForStatementParser.h; sourceTree = "<group>"; };
+		FA01DA921D2D8C8F00FEF775 /* ForStatementParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForStatementParser.m; sourceTree = "<group>"; };
+		FA01DA941D2D8C9700FEF775 /* IfStatementParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IfStatementParser.h; sourceTree = "<group>"; };
+		FA01DA951D2D8C9700FEF775 /* IfStatementParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IfStatementParser.m; sourceTree = "<group>"; };
+		FA01DA971D2D8C9F00FEF775 /* CaseStatementParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseStatementParser.h; sourceTree = "<group>"; };
+		FA01DA981D2D8C9F00FEF775 /* CaseStatementParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseStatementParser.m; sourceTree = "<group>"; };
 		FA1ED7531CEAE8E30067331C /* PascalParserTD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalParserTD.h; sourceTree = "<group>"; };
 		FA1ED7541CEAE8E30067331C /* PascalParserTD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalParserTD.m; sourceTree = "<group>"; };
 		FA1ED7561CEAEB410067331C /* PascalScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalScanner.h; sourceTree = "<group>"; };
@@ -275,14 +290,24 @@
 			children = (
 				FAA036131D24E2D000BEE571 /* AssignmentStatementParser.h */,
 				FAA036141D24E2D000BEE571 /* AssignmentStatementParser.m */,
+				FA01DA971D2D8C9F00FEF775 /* CaseStatementParser.h */,
+				FA01DA981D2D8C9F00FEF775 /* CaseStatementParser.m */,
 				FAA036161D24E2E200BEE571 /* CompoundStatementParser.h */,
 				FAA036171D24E2E200BEE571 /* CompoundStatementParser.m */,
 				FAA0361A1D25931900BEE571 /* ExpressionParser.h */,
 				FAA0361B1D25931900BEE571 /* ExpressionParser.m */,
+				FA01DA911D2D8C8F00FEF775 /* ForStatementParser.h */,
+				FA01DA921D2D8C8F00FEF775 /* ForStatementParser.m */,
+				FA01DA941D2D8C9700FEF775 /* IfStatementParser.h */,
+				FA01DA951D2D8C9700FEF775 /* IfStatementParser.m */,
 				FA1ED7531CEAE8E30067331C /* PascalParserTD.h */,
 				FA1ED7541CEAE8E30067331C /* PascalParserTD.m */,
+				FA01DA8B1D2D8C7C00FEF775 /* RepeatStatementParser.h */,
+				FA01DA8C1D2D8C7C00FEF775 /* RepeatStatementParser.m */,
 				FAA036101D24DE7900BEE571 /* StatementParser.h */,
 				FAA036111D24DE7900BEE571 /* StatementParser.m */,
+				FA01DA8E1D2D8C8600FEF775 /* WhileStatementParser.h */,
+				FA01DA8F1D2D8C8600FEF775 /* WhileStatementParser.m */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -438,6 +463,7 @@
 				FAD097461CEAE46E00797878 /* Backend.m in Sources */,
 				FAAC981D1D08DC8B006F0705 /* PascalSpecialSymbolToken.m in Sources */,
 				FAD097381CE6B1E700797878 /* EofToken.m in Sources */,
+				FA01DA991D2D8C9F00FEF775 /* CaseStatementParser.m in Sources */,
 				FACF1A571CEED0F100F8D65F /* CodeGenerator.m in Sources */,
 				FA536C231CFBD2F5003586A4 /* PascalErrorCode.m in Sources */,
 				FAFBCBD51D1771C300C036D6 /* SymTab.m in Sources */,
@@ -446,15 +472,18 @@
 				FAFAF4621CFBFABD00D563B0 /* PascalErrorToken.m in Sources */,
 				FAA036031D24AFCD00BEE571 /* IntermediateCodeImp.m in Sources */,
 				FA1ED7581CEAEB410067331C /* PascalScanner.m in Sources */,
+				FA01DA961D2D8C9700FEF775 /* IfStatementParser.m in Sources */,
 				FAA036121D24DE7900BEE571 /* StatementParser.m in Sources */,
 				FAA0362F1D25FDA300BEE571 /* AssignmentExecutor.m in Sources */,
 				FAFBCBCF1D176C1100C036D6 /* SymbolTableFactory.m in Sources */,
+				FA01DA8D1D2D8C7C00FEF775 /* RepeatStatementParser.m in Sources */,
 				FAD0972E1CE69F2200797878 /* Source.m in Sources */,
 				FAFAF46F1CFC1C5A00D563B0 /* PascalStringToken.m in Sources */,
 				FAD0971F1CE69CF500797878 /* Parser.m in Sources */,
 				FAD0973F1CE6B8C200797878 /* Notifications.m in Sources */,
 				FAD0972B1CE69E9C00797878 /* Token.m in Sources */,
 				FAA036061D24AFDF00BEE571 /* IntermediateCodeNodeImp.m in Sources */,
+				FA01DA931D2D8C8F00FEF775 /* ForStatementParser.m in Sources */,
 				FAFBCBDB1D1777A400C036D6 /* SymTabKey.m in Sources */,
 				FAD0973B1CE6B78A00797878 /* Message.m in Sources */,
 				FA536C201CFBCF87003586A4 /* PascalErrorHandler.m in Sources */,
@@ -473,6 +502,7 @@
 				FACF1A5A1CEED28700F8D65F /* Executor.m in Sources */,
 				FAFBCBE21D177CC000C036D6 /* CrossReferencer.m in Sources */,
 				FAA036291D25F24100BEE571 /* StatementExecutor.m in Sources */,
+				FA01DA901D2D8C8600FEF775 /* WhileStatementParser.m in Sources */,
 				FAD097161CE69C0C00797878 /* main.m in Sources */,
 				FAFAF4691CFC06A800D563B0 /* PascalTokenType.m in Sources */,
 			);

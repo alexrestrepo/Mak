@@ -10,4 +10,6 @@
 
 @interface ExpressionParser : StatementParser
 
++ (NSSet *)exprStartSet;
+
 @end

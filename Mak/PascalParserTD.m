@@ -78,4 +78,19 @@ static PascalErrorHandler *ErrorHandler;
     return self.errorHandler.errorCount;
 }
 
+- (Token *)synchronizeWithSet:(NSSet <id<TokenType>> *)syncSet {
+    Token *token = [self currentToken];
+    if (![syncSet containsObject:token.type]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode UNEXPECTED_TOKEN]];
+        
+        do {
+            token = [self nextToken];
+            
+        } while (![token isKindOfClass:[EofToken class]]
+                 && ![syncSet containsObject:token.type]);
+    }
+    
+    return token;
+}
+
 @end

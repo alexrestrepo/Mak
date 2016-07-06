@@ -13,6 +13,8 @@
 @interface PascalParserTD : Parser
 
 @property (nonatomic, strong, readonly) PascalErrorHandler *errorHandler;
+
 - (instancetype)initWithParent:(PascalParserTD *)parent;
+- (Token *)synchronizeWithSet:(NSSet <id<TokenType>> *)syncSet;
 
 @end

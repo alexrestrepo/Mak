@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "execute"
+            argument = "compile"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -71,7 +71,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "$(PROJECT_DIR)/Samples/assignments.txt"
+            argument = "$(PROJECT_DIR)/Samples/case.txt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

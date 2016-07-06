@@ -18,6 +18,8 @@
 
 @interface StatementParser : PascalParserTD
 
++ (NSSet *)stmtFollowSet;
++ (NSSet *)stmtStartSet;
 - (id<IntermediateCodeNode>)parseToken:(Token *)token;
 - (void)setLineNumberInNode:(id<IntermediateCodeNode>)node forToken:(Token *)token;
 - (void)parseListFromToken:(Token *)token

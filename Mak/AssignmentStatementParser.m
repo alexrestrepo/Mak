@@ -12,10 +12,22 @@
 #import "SymbolTableStack.h"
 #import "ExpressionParser.h"
 
+static NSSet <id<TokenType>> *ColonEqualsSet;
+
 @implementation AssignmentStatementParser
+
++ (void)initialize {
+    if (self == [AssignmentStatementParser class]) {
+        NSMutableArray *allObjects = [[[ExpressionParser exprStartSet] allObjects] mutableCopy];
+        [allObjects addObject:[PascalTokenType COLON_EQUALS]];
+        [allObjects addObjectsFromArray:[[StatementParser stmtFollowSet] allObjects]];
+        ColonEqualsSet = [NSSet setWithArray:allObjects];
+    }
+}
 
 - (id<IntermediateCodeNode>)parseToken:(Token *)token {
     id<IntermediateCodeNode> assignNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp ASSIGN]];
+    
     NSString *targetName = [token.text lowercaseString];
     SymTabEntry *targetID = [self.symbolTableStack lookup:targetName];
     
@@ -25,10 +37,14 @@
     [targetID appendLineNumber:token.lineNumber];
     
     token = [self nextToken]; // consume the identifier
+    
     id<IntermediateCodeNode> variableNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp VARIABLE]];
     [variableNode setAttribute:targetID forKey:[IntermediateCodeKeyImp ID]];
     
     [assignNode addChild:variableNode];
+    
+    token = [self synchronizeWithSet:ColonEqualsSet];
+    
     if (token.type == [PascalTokenType COLON_EQUALS]) {
         token = [self nextToken];
         
