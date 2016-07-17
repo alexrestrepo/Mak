@@ -14,11 +14,15 @@
 #import "CompoundExecutor.h"
 #import "AssignmentExecutor.h"
 #import "RuntimeErrorCode.h"
+#import "LoopExecutor.h"
+#import "IfExecutor.h"
+#import "SelectExecutor.h"
 
 @implementation StatementExecutor
 
 - (id)executeNode:(id<IntermediateCodeNode>)node {
     id<IntermediateCodeNodeType> nodeType = node.type;
+    
     [self sendMessageForNode:node];
     
     if (nodeType == [IntermediateCodeNodeTypeImp COMPOUND]) {
@@ -28,6 +32,18 @@
     } else if (nodeType == [IntermediateCodeNodeTypeImp ASSIGN]) {
         AssignmentExecutor *assignmentExecutor = [[AssignmentExecutor alloc] initWithParentExecutor:self];
         return [assignmentExecutor executeNode:node];
+        
+    } else if (nodeType == [IntermediateCodeNodeTypeImp LOOP]) {
+        LoopExecutor *loopExecutor = [[LoopExecutor alloc] initWithParentExecutor:self];
+        return [loopExecutor executeNode:node];
+        
+    } else if (nodeType == [IntermediateCodeNodeTypeImp IF]) {
+        IfExecutor *ifExecutor = [[IfExecutor alloc] initWithParentExecutor:self];
+        return [ifExecutor executeNode:node];
+        
+    } else if (nodeType == [IntermediateCodeNodeTypeImp SELECT]) {
+        SelectExecutor *selectExecutor = [[SelectExecutor alloc] initWithParentExecutor:self];
+        return [selectExecutor executeNode:node];
         
     } else if (nodeType == [IntermediateCodeNodeTypeImp NO_OP]) {
         // noop :P

@@ -16,6 +16,9 @@
 		FA1ED7581CEAEB410067331C /* PascalScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1ED7571CEAEB410067331C /* PascalScanner.m */; };
 		FA536C201CFBCF87003586A4 /* PascalErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FA536C1F1CFBCF87003586A4 /* PascalErrorHandler.m */; };
 		FA536C231CFBD2F5003586A4 /* PascalErrorCode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA536C221CFBD2F5003586A4 /* PascalErrorCode.m */; };
+		FA9F2B771D3C45940014056E /* LoopExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B761D3C45940014056E /* LoopExecutor.m */; };
+		FA9F2B7A1D3C45A30014056E /* IfExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B791D3C45A30014056E /* IfExecutor.m */; };
+		FA9F2B7D1D3C45AB0014056E /* SelectExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B7C1D3C45AB0014056E /* SelectExecutor.m */; };
 		FAA036001D24AE8F00BEE571 /* IntermediateCodeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA035FF1D24AE8F00BEE571 /* IntermediateCodeFactory.m */; };
 		FAA036031D24AFCD00BEE571 /* IntermediateCodeImp.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA036021D24AFCD00BEE571 /* IntermediateCodeImp.m */; };
 		FAA036061D24AFDF00BEE571 /* IntermediateCodeNodeImp.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA036051D24AFDF00BEE571 /* IntermediateCodeNodeImp.m */; };
@@ -93,6 +96,12 @@
 		FA536C1F1CFBCF87003586A4 /* PascalErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalErrorHandler.m; sourceTree = "<group>"; };
 		FA536C211CFBD2F5003586A4 /* PascalErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalErrorCode.h; sourceTree = "<group>"; };
 		FA536C221CFBD2F5003586A4 /* PascalErrorCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalErrorCode.m; sourceTree = "<group>"; };
+		FA9F2B751D3C45940014056E /* LoopExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopExecutor.h; sourceTree = "<group>"; };
+		FA9F2B761D3C45940014056E /* LoopExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopExecutor.m; sourceTree = "<group>"; };
+		FA9F2B781D3C45A30014056E /* IfExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IfExecutor.h; sourceTree = "<group>"; };
+		FA9F2B791D3C45A30014056E /* IfExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IfExecutor.m; sourceTree = "<group>"; };
+		FA9F2B7B1D3C45AB0014056E /* SelectExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectExecutor.h; sourceTree = "<group>"; };
+		FA9F2B7C1D3C45AB0014056E /* SelectExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectExecutor.m; sourceTree = "<group>"; };
 		FAA035FE1D24AE8F00BEE571 /* IntermediateCodeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntermediateCodeFactory.h; sourceTree = "<group>"; };
 		FAA035FF1D24AE8F00BEE571 /* IntermediateCodeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntermediateCodeFactory.m; sourceTree = "<group>"; };
 		FAA036011D24AFCD00BEE571 /* IntermediateCodeImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntermediateCodeImp.h; sourceTree = "<group>"; };
@@ -347,6 +356,12 @@
 				FAA036211D25E8BC00BEE571 /* RuntimeErrorHandler.m */,
 				FAA036271D25F24100BEE571 /* StatementExecutor.h */,
 				FAA036281D25F24100BEE571 /* StatementExecutor.m */,
+				FA9F2B751D3C45940014056E /* LoopExecutor.h */,
+				FA9F2B761D3C45940014056E /* LoopExecutor.m */,
+				FA9F2B781D3C45A30014056E /* IfExecutor.h */,
+				FA9F2B791D3C45A30014056E /* IfExecutor.m */,
+				FA9F2B7B1D3C45AB0014056E /* SelectExecutor.h */,
+				FA9F2B7C1D3C45AB0014056E /* SelectExecutor.m */,
 			);
 			name = Interpreter;
 			sourceTree = "<group>";
@@ -488,12 +503,14 @@
 				FAD0973B1CE6B78A00797878 /* Message.m in Sources */,
 				FA536C201CFBCF87003586A4 /* PascalErrorHandler.m in Sources */,
 				FAD097251CE69D9100797878 /* Scanner.m in Sources */,
+				FA9F2B7A1D3C45A30014056E /* IfExecutor.m in Sources */,
 				FAA036151D24E2D000BEE571 /* AssignmentStatementParser.m in Sources */,
 				FACF1A5D1CEED3EC00F8D65F /* Pascal.m in Sources */,
 				FAFAF4651CFBFBFA00D563B0 /* PascalToken.m in Sources */,
 				FAA036221D25E8BC00BEE571 /* RuntimeErrorHandler.m in Sources */,
 				FAA036251D25E96F00BEE571 /* RuntimeErrorCode.m in Sources */,
 				FAC252DD1D27374A00E6E0FB /* NSNumber+Type.m in Sources */,
+				FA9F2B771D3C45940014056E /* LoopExecutor.m in Sources */,
 				FAA0360F1D24C43B00BEE571 /* ParseTreePrinter.m in Sources */,
 				FAA036181D24E2E200BEE571 /* CompoundStatementParser.m in Sources */,
 				FAAC98201D08E30D006F0705 /* PascalNumberToken.m in Sources */,
@@ -503,6 +520,7 @@
 				FAFBCBE21D177CC000C036D6 /* CrossReferencer.m in Sources */,
 				FAA036291D25F24100BEE571 /* StatementExecutor.m in Sources */,
 				FA01DA901D2D8C8600FEF775 /* WhileStatementParser.m in Sources */,
+				FA9F2B7D1D3C45AB0014056E /* SelectExecutor.m in Sources */,
 				FAD097161CE69C0C00797878 /* main.m in Sources */,
 				FAFAF4691CFC06A800D563B0 /* PascalTokenType.m in Sources */,
 			);
