@@ -19,4 +19,11 @@
 - (id<SymbolTableEntry>)lookupLocalTable:(NSString *)name;
 - (id<SymbolTableEntry>)lookup:(NSString *)name;
 
+- (void)setProgramIdEntry:(id<SymbolTableEntry>)entry;
+- (id<SymbolTableEntry>)programIdEntry;
+
+- (id<SymbolTable>)push;
+- (id<SymbolTable>)push:(id<SymbolTable>)table;
+- (id<SymbolTable>)pop;
+
 @end

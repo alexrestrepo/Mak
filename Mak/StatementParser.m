@@ -44,11 +44,11 @@ static NSSet <id<TokenType>> *StmtFollowSet;
     }
 }
 
-+ (NSSet *)stmtStartSet {
++ (NSSet <id<TokenType>> *)stmtStartSet {
     return StmtStartSet;
 }
 
-+ (NSSet *)stmtFollowSet {
++ (NSSet <id<TokenType>> *)stmtFollowSet {
     return StmtFollowSet;
 }
 

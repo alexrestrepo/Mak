@@ -13,6 +13,7 @@
 
 @property (nonatomic, assign) NSInteger currentNestingLevel;
 @property (nonatomic, strong) NSMutableArray<id <SymbolTable>> *stack;
+@property (nonatomic, strong) id<SymbolTableEntry> programId;
 
 @end
 
@@ -42,7 +43,41 @@
 }
 
 - (id<SymbolTableEntry>)lookup:(NSString *)name {
-    return [self lookupLocalTable:name];
+    id<SymbolTableEntry> entry = nil;
+    for (NSInteger i = _currentNestingLevel; (i >= 0) && (!entry); i--) {
+        entry = [_stack[i] lookup:name];
+    }
+    
+    return entry;
+}
+
+- (void)setProgramIdEntry:(id<SymbolTableEntry>)entry {
+    _programId = entry;
+}
+
+- (id<SymbolTableEntry>)programIdEntry {
+    return _programId;
+}
+
+- (id<SymbolTable>)push {
+    id<SymbolTable> symTab = [SymbolTableFactory symbolTableWithNestingLevel:++_currentNestingLevel];
+    [_stack addObject:symTab];
+    
+    return symTab;
+}
+
+- (id<SymbolTable>)push:(id<SymbolTable>)symTab {
+    ++_currentNestingLevel;
+    [_stack addObject:symTab];
+    
+    return symTab;
+}
+
+- (id<SymbolTable>)pop {
+    id<SymbolTable> symTab = _stack[_currentNestingLevel];
+    [_stack removeObjectAtIndex:_currentNestingLevel--];
+    
+    return symTab;
 }
 
 @end

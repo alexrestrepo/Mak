@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SymbolTableFactory.h"
+
 @class Token;
 @class Scanner;
 @protocol IntermediateCode;
-@protocol SymbolTableStack;
 
 @interface Parser : NSObject
 

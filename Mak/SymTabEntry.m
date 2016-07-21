@@ -16,6 +16,8 @@
 @property (nonatomic, weak) id<SymbolTable> symbolTable;
 @property (nonatomic, strong) NSMutableArray *lineNumbers;
 @property (nonatomic, strong) NSMutableDictionary *attributes;
+@property (nonatomic, strong) id<Definition> definition;
+@property (nonatomic, strong) id<TypeSpec> typeSpec;
 
 @end
 

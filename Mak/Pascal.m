@@ -21,6 +21,8 @@
 #import "SymbolTableStack.h"
 #import "CrossReferencer.h"
 #import "ParseTreePrinter.h"
+#import "SymTabEntry.h"
+#import "SymTabKey.h"
 
 @interface Pascal ()
 
@@ -77,8 +79,10 @@
         [_source close];
         
         if (_parser.errorCount == 0) {
-            _intermediateCode = _parser.intermediateCode;
             _symbolTableStack = _parser.symbolTableStack;
+            
+            SymTabEntry *programId = [self.symbolTableStack programIdEntry];
+            _intermediateCode = [programId attributeForKey:[SymTabKey ROUTINE_CODE]];
             
             if (xref) {
                 CrossReferencer *xreferencer = [CrossReferencer new];
@@ -87,7 +91,7 @@
             
             if (intermediate) {
                 ParseTreePrinter *printer = [[ParseTreePrinter alloc] init];
-                NSString *dump = [printer stringFromIntermediateCode:_intermediateCode];
+                NSString *dump = [printer stringFromSymbolTableStack:_symbolTableStack];
                 printf("%s", [dump UTF8String]);
             }
             

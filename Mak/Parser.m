@@ -9,7 +9,6 @@
 #import "Parser.h"
 
 #import "Macros.h"
-#import "SymbolTableFactory.h"
 #import "Scanner.h"
 #import "IntermediateCode.h"
 #import "Token.h"

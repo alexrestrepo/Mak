@@ -1,1 +1,3 @@
 Book code: http://apropos-logic.com/wci/
+
+Identifier -> name.

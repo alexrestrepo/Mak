@@ -10,18 +10,27 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import "Notifications.h"
-#import "Token.h"
+#import "BlockParser.h"
+#import "DefinitionImpl.h"
 #import "EofToken.h"
-#import "Message.h"
-#import "Macros.h"
-#import "PascalTokenType.h"
-#import "SymbolTableFactory.h"
 #import "IntermediateCodeFactory.h"
+#import "Macros.h"
+#import "Message.h"
+#import "Notifications.h"
+#import "PascalTokenType.h"
+#import "Predefined.h"
 #import "StatementParser.h"
+#import "SymTabKey.h"
+#import "SymbolTableFactory.h"
+#import "Token.h"
 
 static PascalErrorHandler *ErrorHandler;
 
+@interface PascalParserTD()
+
+@property (nonatomic, strong) id<SymbolTableEntry> routineId;
+
+@end
 
 @implementation PascalParserTD
 
@@ -36,29 +45,31 @@ static PascalErrorHandler *ErrorHandler;
 }
 
 - (void)parse {
-    self.intermediateCode = [IntermediateCodeFactory intermediateCode];
     NSTimeInterval startTime = CACurrentMediaTime();
     
+    self.intermediateCode = [IntermediateCodeFactory intermediateCode];
+    [Predefined initializeWithSymbolTableStack:self.symbolTableStack];
+    
+    _routineId = [self.symbolTableStack addEntryToLocalTable:@"dummyprogramname"];
+    [_routineId setDefinition:[DefinitionImpl PROGRAM]];
+    [self.symbolTableStack setProgramIdEntry:_routineId];
+    
+    [_routineId setAttribute:[self.symbolTableStack push] forKey:[SymTabKey ROUTINE_SYMTAB]];
+    [_routineId setAttribute:self.intermediateCode forKey:[SymTabKey ROUTINE_ICODE]];
+    
+    BlockParser *blockParser = [[BlockParser alloc] initWithParent:self];
+    
     Token *token = [self nextToken];
-    id<IntermediateCodeNode> rootNode = nil;
+    id<IntermediateCodeNode> rootNode = [blockParser parseToken:token routineEntry:_routineId];
+    [self.intermediateCode setRootNode:rootNode];
+    [self.symbolTableStack pop];
     
-    if (token.type == [PascalTokenType BEGIN]) {
-        StatementParser *statementParser = [[StatementParser alloc] initWithParent:self];
-        rootNode = [statementParser parseToken:token];
-        token = [self currentToken];
-        
-    } else {
-        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode UNEXPECTED_TOKEN]];
-    }
-    
+    // look for the final .
+    token = [self currentToken];
     if (token.type != [PascalTokenType DOT]) {
         [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode MISSING_PERIOD]];
     }
-    
     token = [self currentToken];
-    if (rootNode) {
-        [self.intermediateCode setRootNode:rootNode];
-    }
     
     NSTimeInterval elapsedTime = (CACurrentMediaTime() - startTime);
     

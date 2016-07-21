@@ -8,6 +8,7 @@
 
 #import "ParseTreePrinter.h"
 #import "SymbolTable.h"
+#import "SymTabKey.h"
 
 @interface ParseTreePrinter ()
 
@@ -97,6 +98,31 @@ static const NSInteger IndentWidth = 4;
         result = [result stringByAppendingString:[self stringFromAttributeWithStringKey:@"LEVEL" object:@(level)]];
     }
     
+    return result;
+}
+
+- (NSString *)stringFromSymbolTableStack:(id<SymbolTableStack>)stack {
+    id<SymbolTableEntry> programID = [stack programIdEntry];
+    NSString *root = [self stringFromRoutine:programID];
+    return [NSString stringWithFormat:@"\n===== INTERMEDIATE CODE =====\n%@\n", root];
+}
+
+- (NSString *)stringFromRoutine:(id<SymbolTableEntry>)routineID {
+    id<Definition> definition = [routineID definition];
+    NSMutableString *result = [NSMutableString new];
+
+    [result appendFormat:@"\n*** %@ %@ ***\n", definition, [routineID name]];
+    id<IntermediateCode> icode = [routineID attributeForKey:[SymTabKey ROUTINE_ICODE]];
+    if ([icode rootNode]) {
+        [result appendString:[self stringFromNode:[icode rootNode]]];
+    }
+
+    NSArray <id<SymbolTableEntry>> *routineIDs = [routineID attributeForKey:[SymTabKey ROUTINE_ROUTINES]];
+    if (routineIDs) {
+        for (id<SymbolTableEntry> routineID in routineIDs) {
+            [result appendString:[self stringFromRoutine:routineID]];
+        }
+    }
     return result;
 }
 
