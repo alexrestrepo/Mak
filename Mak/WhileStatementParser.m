@@ -9,6 +9,8 @@
 #import "WhileStatementParser.h"
 
 #import "ExpressionParser.h"
+#import "Predefined.h"
+#import "TypeChecker.h"
 
 static NSSet <id<TokenType>> *DoSet;
 
@@ -40,7 +42,13 @@ static NSSet <id<TokenType>> *DoSet;
     [breakNode addChild:notNode]; // cuz the false of the expresion breaks the loop
     
     ExpressionParser *expressionParser = [[ExpressionParser alloc] initWithParent:self];
-    [notNode addChild:[expressionParser parseToken:token]];
+    id<IntermediateCodeNode> expressionNode = [expressionParser parseToken:token];
+    [notNode addChild:expressionNode];
+
+    id<TypeSpec> expressionType = expressionNode ? [expressionNode typeSpec] : [Predefined undefinedType];
+    if (![TypeChecker isBoolean:expressionType]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INCOMPATIBLE_TYPES]];
+    }
     
     token = [self synchronizeWithSet:DoSet];
     if (token.type == [PascalTokenType DO]) {

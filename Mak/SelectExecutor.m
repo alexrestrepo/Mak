@@ -11,6 +11,7 @@
 #import "ExpressionExecutor.h"
 #import "NSNumber+Type.h"
 #import "IntermediateCodeKeyImp.h"
+#import "IntermediateCodeNodeTypeImp.h"
 
 static NSMutableDictionary <id<IntermediateCodeNode>, NSMutableDictionary <id, id<IntermediateCodeNode>> *> *JumpCache;
 
@@ -57,6 +58,9 @@ static NSMutableDictionary <id<IntermediateCodeNode>, NSMutableDictionary <id, i
         NSArray <id<IntermediateCodeNode>> *constantsList = [constantsNode children];
         for (id<IntermediateCodeNode> constantNode in constantsList) {
             id value = [constantNode attributeForKey:[IntermediateCodeKeyImp VALUE]];
+            if (constantNode.type == [IntermediateCodeNodeTypeImp STRING_CONSTANT]) {
+                value = [(NSString *)value substringToIndex:1];
+            }
             jumpTable[value] = statementNode;
         }
     }

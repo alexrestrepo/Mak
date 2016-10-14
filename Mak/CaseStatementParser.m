@@ -9,6 +9,11 @@
 #import "CaseStatementParser.h"
 
 #import "ExpressionParser.h"
+#import "Predefined.h"
+#import "TypeChecker.h"
+#import "TypeFormImpl.h"
+#import "DefinitionImpl.h"
+#import "SymTabKey.h"
 
 static NSSet <id<TokenType>> *ConstantStartSet;
 static NSSet <id<TokenType>> *OfSet;
@@ -50,7 +55,13 @@ static NSSet <id<TokenType>> *CommaSet;
     
     id<IntermediateCodeNode> selectNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp SELECT]];
     ExpressionParser *expressionParser = [[ExpressionParser alloc] initWithParent:self];
-    [selectNode addChild:[expressionParser parseToken:token]];
+    id<IntermediateCodeNode> expressionNode = [expressionParser parseToken:token];
+    [selectNode addChild:expressionNode];
+
+    id<TypeSpec> expressionType = [expressionNode typeSpec];
+    if (![TypeChecker isInteger:expressionType] && ![TypeChecker isChar:expressionType] && [expressionType form] != [TypeFormImpl ENUMERATION]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INCOMPATIBLE_TYPES]];
+    }
     
     token = [self synchronizeWithSet:OfSet];
     if (token.type == [PascalTokenType OF]) {
@@ -61,7 +72,7 @@ static NSSet <id<TokenType>> *CommaSet;
     
     NSMutableSet *constantSet = [NSMutableSet new];
     while (![token isKindOfClass:[EofToken class]] && (token.type != [PascalTokenType END])) {
-        [selectNode addChild:[self parseBranchWithToken:token withSet:constantSet]];
+        [selectNode addChild:[self parseBranchWithToken:token type:expressionType withSet:constantSet]];
         token = [self currentToken];
         id<TokenType> tokenType = token.type;
         
@@ -82,12 +93,12 @@ static NSSet <id<TokenType>> *CommaSet;
     return selectNode;
 }
 
-- (id<IntermediateCodeNode>)parseBranchWithToken:(Token *)token withSet:(NSMutableSet *)constantSet {
+- (id<IntermediateCodeNode>)parseBranchWithToken:(Token *)token type:(id<TypeSpec>)expressionType withSet:(NSMutableSet *)constantSet {
     id<IntermediateCodeNode> branchNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp SELECT_BRANCH]];
     id<IntermediateCodeNode> constantsNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp SELECT_CONSTANTS]];
     
     [branchNode addChild:constantsNode];
-    [self parseConstantListWithToken:token inNode:constantsNode withSet:constantSet];
+    [self parseConstantListWithToken:token type:expressionType inNode:constantsNode withSet:constantSet];
     
     token = [self currentToken];
     if (token.type == [PascalTokenType COLON]) {
@@ -102,9 +113,9 @@ static NSSet <id<TokenType>> *CommaSet;
     return branchNode;
 }
 
-- (void)parseConstantListWithToken:(Token *)token inNode:(id<IntermediateCodeNode>)constantsNode withSet:(NSMutableSet *)constantsSet {
+- (void)parseConstantListWithToken:(Token *)token type:(id<TypeSpec>)expressionType inNode:(id<IntermediateCodeNode>)constantsNode withSet:(NSMutableSet *)constantsSet {
     while ([ConstantStartSet containsObject:token.type]) {
-        [constantsNode addChild:[self parseConstantWithToken:token withSet:constantsSet]];
+        [constantsNode addChild:[self parseConstantWithToken:token type:expressionType withSet:constantsSet]];
         
         token = [self synchronizeWithSet:CommaSet];
         
@@ -117,9 +128,10 @@ static NSSet <id<TokenType>> *CommaSet;
     }
 }
 
-- (id<IntermediateCodeNode>)parseConstantWithToken:(Token *)token withSet:(NSMutableSet *)constantsSet {
+- (id<IntermediateCodeNode>)parseConstantWithToken:(Token *)token type:(id<TypeSpec>)expressionType withSet:(NSMutableSet *)constantsSet {
     id<TokenType> sign = nil;
     id<IntermediateCodeNode> constantNode = nil;
+    id<TypeSpec> constantType = nil;
     
     token = [self synchronizeWithSet:ConstantStartSet];
     id<TokenType> tokenType = token.type;
@@ -131,12 +143,17 @@ static NSSet <id<TokenType>> *CommaSet;
     
     if (token.type == [PascalTokenType IDENTIFIER]) {
         constantNode = [self parseIdentifierConstantWithToken:token sign:sign];
+        if (constantNode) {
+            constantType = [constantNode typeSpec];
+        }
         
     } else if (token.type == [PascalTokenType INTEGER]) {
         constantNode = [self parseIntegerConstantWithToken:token sign:sign];
+        constantType = [Predefined integerType];
         
     } else if (token.type == [PascalTokenType STRING]) {
         constantNode = [self parseCharacterConstantWithToken:token sign:sign];
+        constantType = [Predefined charType];
         
     } else {
         [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INVALID_CONSTANT]];
@@ -150,15 +167,47 @@ static NSSet <id<TokenType>> *CommaSet;
             [constantsSet addObject:value];
         }
     }
-    
+
+    if (![TypeChecker areComparisonCompatibleType1:expressionType type2:constantType]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INCOMPATIBLE_TYPES]];
+    }
+
     [self nextToken]; //consume constant
+    [constantNode setTypeSpec:constantType];
     return constantNode;
 }
 
 - (id<IntermediateCodeNode>)parseIdentifierConstantWithToken:(Token *)token sign:(id<TokenType>)sign {
-    // don't allow for now
-    [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INVALID_CONSTANT]];
-    return nil;
+    id<IntermediateCodeNode> constantNode = nil;
+    id<TypeSpec> constantType = nil;
+
+    NSString *name = [token.text lowercaseString];
+    id<SymbolTableEntry> identifier = [self.symbolTableStack lookup:name];
+    if (!identifier) {
+        identifier = [self.symbolTableStack addEntryToLocalTable:name];
+        [identifier setDefinition:[DefinitionImpl UNDEFINED]];
+        [identifier setTypeSpec:[Predefined undefinedType]];
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode IDENTIFIER_UNDEFINED]];
+        return nil;
+    }
+
+    id<Definition> definitionCode = [identifier definition];
+    if ((definitionCode == [DefinitionImpl CONSTANT]) || (definitionCode == [DefinitionImpl ENUMERATION_CONSTANT])) {
+        id constantValue = [identifier attributeForKey:[SymTabKey CONSTANT_VALUE]];
+        constantType = [identifier typeSpec];
+        if (sign && ![TypeChecker isInteger:constantType]) {
+            [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INVALID_CONSTANT]];
+        }
+
+        constantNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp INTEGER_CONSTANT]];
+        [constantNode setAttribute:constantValue forKey:[IntermediateCodeKeyImp VALUE]];
+    }
+
+    [identifier appendLineNumber:token.lineNumber];
+    if (constantNode) {
+        [constantNode setTypeSpec:constantType];
+    }
+    return constantNode;
 }
 
 - (id<IntermediateCodeNode>)parseIntegerConstantWithToken:(Token *)token sign:(id<TokenType>)sign {

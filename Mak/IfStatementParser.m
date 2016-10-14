@@ -9,6 +9,8 @@
 #import "IfStatementParser.h"
 
 #import "ExpressionParser.h"
+#import "TypeChecker.h"
+#import "Predefined.h"
 
 static NSSet <id<TokenType>> *ThenSet;
 
@@ -32,8 +34,14 @@ static NSSet <id<TokenType>> *ThenSet;
     id<IntermediateCodeNode> ifNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp IF]];
     
     ExpressionParser *expressionParser = [[ExpressionParser alloc] initWithParent:self];
-    [ifNode addChild:[expressionParser parseToken:token]];
-    
+    id<IntermediateCodeNode> expressionNode = [expressionParser parseToken:token];
+    [ifNode addChild:expressionNode];
+
+    id<TypeSpec> expressionType = expressionNode ? [expressionNode typeSpec] : [Predefined undefinedType];
+    if (![TypeChecker isBoolean:expressionType]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INCOMPATIBLE_TYPES]];
+    }
+
     token = [self synchronizeWithSet:ThenSet];
     if (token.type == [PascalTokenType THEN]) {
         token = [self nextToken];

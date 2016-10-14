@@ -11,6 +11,9 @@
 #import "ExpressionParser.h"
 #import "AssignmentStatementParser.h"
 #import "IntermediateCodeNodeImp.h"
+#import "Predefined.h"
+#import "TypeChecker.h"
+#import "TypeFormImpl.h"
 
 static NSSet <id<TokenType>> *ToDowntoSet;
 static NSSet <id<TokenType>> *DoSet;
@@ -48,8 +51,13 @@ static NSSet <id<TokenType>> *DoSet;
     
     AssignmentStatementParser *assignmentParser = [[AssignmentStatementParser alloc] initWithParent:self];
     id<IntermediateCodeNode> initAssignNode = [assignmentParser parseToken:token];
-    
+    id<TypeSpec> controlType = initAssignNode ? [initAssignNode typeSpec] : [Predefined undefinedType];
+
     [self setLineNumberInNode:initAssignNode forToken:targetToken];
+
+    if (![TypeChecker isInteger:controlType] && [controlType form] != [TypeFormImpl ENUMERATION]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INCOMPATIBLE_TYPES]];
+    }
     
     [compoundNode addChild:initAssignNode];
     [compoundNode addChild:loopNode];
@@ -68,12 +76,19 @@ static NSSet <id<TokenType>> *DoSet;
     id<IntermediateCodeNode> relOpNode = [IntermediateCodeFactory intermediateCodeNodeWithType:(direction == [PascalTokenType TO]
                                                                                                 ? [IntermediateCodeNodeTypeImp GT]
                                                                                                 : [IntermediateCodeNodeTypeImp LT])];
-    
+
+    [relOpNode setTypeSpec:[Predefined booleanType]];
     IntermediateCodeNodeImp *controlVarNode = [initAssignNode children][0];
     [relOpNode addChild:[controlVarNode copy]];
     
     ExpressionParser *expressionParser = [[ExpressionParser alloc] initWithParent:self];
-    [relOpNode addChild:[expressionParser parseToken:token]];
+    id<IntermediateCodeNode> expressionNode = [expressionParser parseToken:token];
+    [relOpNode addChild:expressionNode];
+
+    id<TypeSpec> expressionType = expressionNode ? [expressionNode typeSpec] : [Predefined undefinedType];
+    if (![TypeChecker areAssignmentCompatibleTarget:controlType value:expressionType]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INCOMPATIBLE_TYPES]];
+    }
     
     [testNode addChild:relOpNode];
     [loopNode addChild:testNode];

@@ -70,7 +70,29 @@ static const NSInteger IndentWidth = 4;
 }
 
 - (NSString *)stringFromNodeTypeSpec:(id<IntermediateCodeNode>)node {
-    return @"";
+    NSString *typeString = @"";
+    id<TypeSpec> typeSpec = [node typeSpec];
+
+    if (typeSpec) {
+        NSString *saveMarging = [_indentation copy];
+        self.indentation = [self.indentation stringByAppendingString:_indent];
+
+        NSString *typeName;
+        id<SymbolTableEntry> identifier = [typeSpec identifier];
+        if (identifier) {
+            typeName = [identifier name];
+
+        } else {
+            NSInteger code = [typeSpec hash] + [[typeSpec form] hash];
+            typeName = [NSString stringWithFormat:@"$anon_%lx", (long)code];
+        }
+
+        typeString = [self stringFromAttributeWithStringKey:@"TYPE_ID" object:typeName];
+        self.indentation = saveMarging;
+    }
+
+
+    return typeString;
 }
 
 - (NSString *)stringFromChildNodes:(NSArray <id<IntermediateCodeNode>> *)children {

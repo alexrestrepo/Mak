@@ -11,6 +11,9 @@
 #import "SymTabEntry.h"
 #import "SymbolTableStack.h"
 #import "ExpressionParser.h"
+#import "VariableParser.h"
+#import "Predefined.h"
+#import "TypeChecker.h"
 
 static NSSet <id<TokenType>> *ColonEqualsSet;
 
@@ -27,34 +30,30 @@ static NSSet <id<TokenType>> *ColonEqualsSet;
 
 - (id<IntermediateCodeNode>)parseToken:(Token *)token {
     id<IntermediateCodeNode> assignNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp ASSIGN]];
-    
-    NSString *targetName = [token.text lowercaseString];
-    SymTabEntry *targetID = [self.symbolTableStack lookup:targetName];
-    
-    if (!targetID) {
-        targetID = [self.symbolTableStack addEntryToLocalTable:targetName];
-    }
-    [targetID appendLineNumber:token.lineNumber];
-    
-    token = [self nextToken]; // consume the identifier
-    
-    id<IntermediateCodeNode> variableNode = [IntermediateCodeFactory intermediateCodeNodeWithType:[IntermediateCodeNodeTypeImp VARIABLE]];
-    [variableNode setAttribute:targetID forKey:[IntermediateCodeKeyImp ID]];
-    
-    [assignNode addChild:variableNode];
-    
+
+    VariableParser *variableParser = [[VariableParser alloc] initWithParent:self];
+    id<IntermediateCodeNode> targetNode = [variableParser parseToken:token];
+    id<TypeSpec> targetType = targetNode ? [targetNode typeSpec] : [Predefined undefinedType];
+
+    [assignNode addChild:targetNode];
     token = [self synchronizeWithSet:ColonEqualsSet];
-    
     if (token.type == [PascalTokenType COLON_EQUALS]) {
         token = [self nextToken];
-        
+
     } else {
         [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode MISSING_COLON_EQUALS]];
     }
-    
+
     ExpressionParser *expressionParser = [[ExpressionParser alloc] initWithParent:self];
-    [assignNode addChild:[expressionParser parseToken:token]];
-    
+    id<IntermediateCodeNode> expressionNode = [expressionParser parseToken:token];
+    [assignNode addChild:expressionNode];
+
+    id<TypeSpec> expressionType = expressionNode ? [expressionNode typeSpec] : [Predefined undefinedType];
+    if (![TypeChecker areAssignmentCompatibleTarget:targetType value:expressionType]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INCOMPATIBLE_TYPES]];
+    }
+
+    [assignNode setTypeSpec:targetType];
     return assignNode;
 }
 

@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary<id<IntermediateCodeKey>, id> *attributes;
 @property (nonatomic, strong) NSMutableArray<id<IntermediateCodeNode>> *children;
+@property (nonatomic, strong) id<TypeSpec> typeSpec;
 
 @end
 

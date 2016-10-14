@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TypeSpec.h"
 
 @protocol IntermediateCodeKey <NSObject, NSCopying>
 
@@ -26,6 +27,8 @@
 - (NSDictionary<id<IntermediateCodeKey>, id> *)attributes;
 - (void)setAttribute:(id)value forKey:(id<IntermediateCodeKey>)key;
 - (id)attributeForKey:(id<IntermediateCodeKey>)key;
+- (void)setTypeSpec:(id<TypeSpec>)typeSpec;
+- (id<TypeSpec>)typeSpec;
 
 @end
 

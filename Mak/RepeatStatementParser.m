@@ -9,6 +9,8 @@
 #import "RepeatStatementParser.h"
 
 #import "ExpressionParser.h"
+#import "Predefined.h"
+#import "TypeChecker.h"
 
 @implementation RepeatStatementParser
 
@@ -27,8 +29,14 @@
     token = [self currentToken];
     
     ExpressionParser *expressionParser = [[ExpressionParser alloc] initWithParent:self];
-    [testNode addChild:[expressionParser parseToken:token]];
+    id<IntermediateCodeNode> expressionNode = [expressionParser parseToken:token];
+    [testNode addChild:expressionNode];
     [loopNode addChild:testNode];
+
+    id<TypeSpec> expressionType = expressionNode ? [expressionNode typeSpec] : [Predefined undefinedType];
+    if (![TypeChecker isBoolean:expressionType]) {
+        [self.errorHandler flagToken:token withErrorCode:[PascalErrorCode INCOMPATIBLE_TYPES]];
+    }
     
     return loopNode;
 }

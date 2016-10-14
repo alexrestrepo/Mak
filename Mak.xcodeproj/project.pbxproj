@@ -33,6 +33,7 @@
 		FA5D4DD91D3F165100147436 /* TypeKeyImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5D4DD81D3F165100147436 /* TypeKeyImpl.m */; };
 		FA5D4DDC1D3F186100147436 /* TypeSpecImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5D4DDB1D3F186100147436 /* TypeSpecImpl.m */; };
 		FA5D4DDF1D3F47A200147436 /* Predefined.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5D4DDE1D3F47A200147436 /* Predefined.m */; };
+		FA60F7B71DAF581A00546567 /* TypeChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA60F7B61DAF581A00546567 /* TypeChecker.m */; };
 		FA9F2B771D3C45940014056E /* LoopExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B761D3C45940014056E /* LoopExecutor.m */; };
 		FA9F2B7A1D3C45A30014056E /* IfExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B791D3C45A30014056E /* IfExecutor.m */; };
 		FA9F2B7D1D3C45AB0014056E /* SelectExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B7C1D3C45AB0014056E /* SelectExecutor.m */; };
@@ -68,6 +69,7 @@
 		FAD0973B1CE6B78A00797878 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD0973A1CE6B78A00797878 /* Message.m */; };
 		FAD0973F1CE6B8C200797878 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD0973E1CE6B8C200797878 /* Notifications.m */; };
 		FAD097461CEAE46E00797878 /* Backend.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD097451CEAE46E00797878 /* Backend.m */; };
+		FAD98FAD1DB454D100BF7075 /* VariableParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD98FAC1DB454D100BF7075 /* VariableParser.m */; };
 		FAFAF4621CFBFABD00D563B0 /* PascalErrorToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFAF4611CFBFABD00D563B0 /* PascalErrorToken.m */; };
 		FAFAF4651CFBFBFA00D563B0 /* PascalToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFAF4641CFBFBFA00D563B0 /* PascalToken.m */; };
 		FAFAF4691CFC06A800D563B0 /* PascalTokenType.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFAF4681CFC06A800D563B0 /* PascalTokenType.m */; };
@@ -149,6 +151,8 @@
 		FA5D4DDB1D3F186100147436 /* TypeSpecImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeSpecImpl.m; sourceTree = "<group>"; };
 		FA5D4DDD1D3F47A200147436 /* Predefined.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Predefined.h; sourceTree = "<group>"; };
 		FA5D4DDE1D3F47A200147436 /* Predefined.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Predefined.m; sourceTree = "<group>"; };
+		FA60F7B51DAF581A00546567 /* TypeChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeChecker.h; sourceTree = "<group>"; };
+		FA60F7B61DAF581A00546567 /* TypeChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeChecker.m; sourceTree = "<group>"; };
 		FA9F2B751D3C45940014056E /* LoopExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopExecutor.h; sourceTree = "<group>"; };
 		FA9F2B761D3C45940014056E /* LoopExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopExecutor.m; sourceTree = "<group>"; };
 		FA9F2B781D3C45A30014056E /* IfExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IfExecutor.h; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 		FAD097421CEAE2EF00797878 /* SymbolTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTable.h; sourceTree = "<group>"; };
 		FAD097441CEAE46E00797878 /* Backend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Backend.h; sourceTree = "<group>"; };
 		FAD097451CEAE46E00797878 /* Backend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Backend.m; sourceTree = "<group>"; };
+		FAD98FAB1DB454D100BF7075 /* VariableParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableParser.h; sourceTree = "<group>"; };
+		FAD98FAC1DB454D100BF7075 /* VariableParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableParser.m; sourceTree = "<group>"; };
 		FAFAF4601CFBFABD00D563B0 /* PascalErrorToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalErrorToken.h; sourceTree = "<group>"; };
 		FAFAF4611CFBFABD00D563B0 /* PascalErrorToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PascalErrorToken.m; sourceTree = "<group>"; };
 		FAFAF4631CFBFBFA00D563B0 /* PascalToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalToken.h; sourceTree = "<group>"; };
@@ -357,6 +363,8 @@
 				FA32C4801D42CE770069F90A /* Definition.h */,
 				FA32C4811D42CF110069F90A /* DefinitionImpl.h */,
 				FA32C4821D42CF110069F90A /* DefinitionImpl.m */,
+				FA60F7B51DAF581A00546567 /* TypeChecker.h */,
+				FA60F7B61DAF581A00546567 /* TypeChecker.m */,
 			);
 			name = Intermediate;
 			sourceTree = "<group>";
@@ -406,6 +414,8 @@
 				FA32C4911D45A1B90069F90A /* VariableDeclarationsParser.m */,
 				FA01DA8E1D2D8C8600FEF775 /* WhileStatementParser.h */,
 				FA01DA8F1D2D8C8600FEF775 /* WhileStatementParser.m */,
+				FAD98FAB1DB454D100BF7075 /* VariableParser.h */,
+				FAD98FAC1DB454D100BF7075 /* VariableParser.m */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -568,6 +578,8 @@
 				FAD097461CEAE46E00797878 /* Backend.m in Sources */,
 				FAAC981D1D08DC8B006F0705 /* PascalSpecialSymbolToken.m in Sources */,
 				FAD097381CE6B1E700797878 /* EofToken.m in Sources */,
+				FA60F7B71DAF581A00546567 /* TypeChecker.m in Sources */,
+				FAD98FAD1DB454D100BF7075 /* VariableParser.m in Sources */,
 				FA017DB41D4979CB000C5759 /* SubrangeTypeParser.m in Sources */,
 				FA01DA991D2D8C9F00FEF775 /* CaseStatementParser.m in Sources */,
 				FACF1A571CEED0F100F8D65F /* CodeGenerator.m in Sources */,
